@@ -19,12 +19,12 @@ export const Home: React.FC<HomeProps> = ({ setActivePage }) => {
         />
         <div className="hero-overlay"></div>
         <div className="hero-content">
-          <span className="hero-badge">OMNI-CHANNEL MARKETING AGENCY</span>
-          <h1 className="hero-title">All great marketing begins with a plan!</h1>
-          <p className="hero-description">
+          <span className="hero-badge animate-fade-up">OMNI-CHANNEL MARKETING AGENCY</span>
+          <h1 className="hero-title animate-hero-title">All great marketing begins with a plan!</h1>
+          <p className="hero-description animate-fade-up delay-1">
             Ivah Media delivers high-impact branding, digital marketing, events expertise, and outdoor advertising across the UAE and globally.
           </p>
-          <button className="hero-cta" onClick={() => setActivePage('contact')}>
+          <button className="hero-cta animate-fade-up delay-2" onClick={() => setActivePage('contact')}>
             Start Your Campaign
           </button>
         </div>

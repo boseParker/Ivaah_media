@@ -24,8 +24,8 @@ export const About: React.FC = () => {
   ];
 
   const industries = [
-    'Real Estate', 'Government', 'Retail', 'Automotive', 
-    'Travel & Tourism', 'Hospitality', 'Industrial / B2B', 
+    'Real Estate', 'Government', 'Retail', 'Automotive',
+    'Travel & Tourism', 'Hospitality', 'Industrial / B2B',
     'International Brands', 'Non-profit', 'Ecommerce'
   ];
 
@@ -42,6 +42,30 @@ export const About: React.FC = () => {
         </div>
       </section>
 
+      {/* Stats Section */}
+      <section className="stats-section">
+        <div className="section-container" style={{ paddingTop: '0', paddingBottom: '40px' }}>
+          <div className="stats-grid">
+            <div className="stat-card animate-fade-up delay-1">
+              <span className="stat-number">60 min</span>
+              <span className="stat-label">Quote Turnaround</span>
+            </div>
+            <div className="stat-card animate-fade-up delay-2">
+              <span className="stat-number">100%</span>
+              <span className="stat-label">Cost Transparency</span>
+            </div>
+            <div className="stat-card animate-fade-up delay-3">
+              <span className="stat-number">97%</span>
+              <span className="stat-label">On-Budget Delivery</span>
+            </div>
+            <div className="stat-card animate-fade-up delay-4">
+              <span className="stat-number">0</span>
+              <span className="stat-label">Bureaucratic Delays</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 10-Step Guide */}
       <section className="steps-section" id="how-we-do-it">
         <div className="section-container">
@@ -54,8 +78,8 @@ export const About: React.FC = () => {
           <div className="steps-container">
             <div className="steps-list">
               {steps.map((step, idx) => (
-                <div 
-                  key={idx} 
+                <div
+                  key={idx}
                   className={`step-item ${activeStep === idx ? 'active' : ''}`}
                   onClick={() => setActiveStep(activeStep === idx ? null : idx)}
                 >

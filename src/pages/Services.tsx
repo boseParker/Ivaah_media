@@ -90,10 +90,15 @@ export const Services: React.FC = () => {
       {/* Pillar 3: Digital Marketing */}
       <section className="service-pillar-section" id="digital-marketing">
         <div className="section-container">
-          <div className="section-header">
-            <span className="pillar-tag">PILLAR 03</span>
-            <h3>Digital Marketing Capabilities</h3>
-            <p>10 specialized digital service lines to build, manage, and scale your brand footprint online.</p>
+          <div className="section-header" style={{ display: 'flex', gap: '40px', alignItems: 'center', flexWrap: 'wrap', maxWidth: 'none', marginBottom: '50px' }}>
+            <div style={{ flex: 1.2, minWidth: '300px' }}>
+              <span className="pillar-tag">PILLAR 03</span>
+              <h3>Digital Marketing Capabilities</h3>
+              <p>10 specialized digital service lines to build, manage, and scale your brand footprint online.</p>
+            </div>
+            <div style={{ flex: 0.8, minWidth: '300px' }}>
+              <img src="/digital_marketing.png" alt="Digital Marketing Analytics" className="showcase-img" style={{ borderRadius: '12px', border: '1px solid var(--color-border)', maxHeight: '180px', width: '100%', objectFit: 'cover' }} />
+            </div>
           </div>
           <div className="digital-cards-grid">
             {digitalServices.map((service, idx) => (

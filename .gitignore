@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Project Documents & Extraction Assets
+*.pdf
+*.docx
+*.zip
+docx_extracted/
+extract.js
+extract.cjs
