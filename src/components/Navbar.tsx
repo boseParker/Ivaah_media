@@ -102,7 +102,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={(e) => handleDropdownToggle(e, 'about')}
             >
               <Info size={16} className="nav-icon" />
-              Solution
+              About
               {activeDropdown === 'about' ? <ChevronUp size={14} className="arrow-icon" /> : <ChevronDown size={14} className="arrow-icon" />}
             </button>
             {activeDropdown === 'about' && (
@@ -163,9 +163,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
             {activeDropdown === 'company' && (
               <div className="nav-dropdown-menu">
-                <button onClick={() => handlePageSelect('company', 'about')}>
-                  <Info size={14} /> About
-                </button>
+                
                 <button onClick={() => handlePageSelect('company', 'careers')}>
                   <Users size={14} /> Careers
                 </button>

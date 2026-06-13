@@ -2,6 +2,7 @@ import React from 'react';
 import StatsSection from '../components/StateSection/statesection';
 import { WhoWeAreSection } from '../components/Whoweare/whoweare';
 import { VisionMissionSection } from '../components/VisionMission/visionmissionsection';
+import WhyChooseUs from '../components/whychooseus/whychooseus';
 interface HomeProps {
   setActivePage: (page: string) => void;
 }
@@ -94,6 +95,9 @@ export const Home: React.FC<HomeProps> = ({ setActivePage }) => {
 </section>
 <section className="visionmission-section">
   <VisionMissionSection />
+</section>
+<section className="whychooseus-section">
+  <WhyChooseUs />
 </section>
     </div>
   );
