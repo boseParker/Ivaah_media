@@ -1503,3 +1503,29 @@ html, body {
   color: #555555;
   font-size: 0.85rem;
 }
+/* Align standard buttons and link text with icons */
+.nav-link, 
+.nav-dropdown-menu button, 
+.mobile-nav-link, 
+.mobile-section-title,
+.mobile-sub-menu button,
+.nav-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Spaces the icon cleanly away from the text string */
+  text-align: left;
+}
+
+/* Ensure arrow icons push to the right edge of desktop link tabs */
+.arrow-icon {
+  margin-left: 4px;
+  transition: transform 0.2s ease;
+}
+
+/* Small visual polish for CTA button layout arrow */
+.cta-icon {
+  transition: transform 0.2s ease;
+}
+.nav-cta-btn:hover .cta-icon {
+  transform: translateX(3px);
+}

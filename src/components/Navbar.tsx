@@ -1,4 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import { 
+  ChevronDown, 
+  ChevronUp,
+  Home, 
+  Info, 
+  Briefcase, 
+  Building2, 
+  Users, 
+  Activity, 
+  Target, 
+  Layers,
+  Map, 
+  Palette, 
+  Globe, 
+  HelpCircle,
+  FileText,
+  ShieldCheck,
+  Mail,
+  ArrowRight
+} from 'lucide-react';
 
 interface NavbarProps {
   activePage: string;
@@ -71,6 +91,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className={`nav-link ${activePage === 'home' ? 'active' : ''}`}
             onClick={() => handlePageSelect('home')}
           >
+            <Home size={16} className="nav-icon" />
             Home
           </button>
 
@@ -80,15 +101,24 @@ export const Navbar: React.FC<NavbarProps> = ({
               className={`nav-link ${activePage === 'about' ? 'active' : ''}`}
               onClick={(e) => handleDropdownToggle(e, 'about')}
             >
-              About
-              <span className="dropdown-arrow">▼</span>
+              <Info size={16} className="nav-icon" />
+              Solution
+              {activeDropdown === 'about' ? <ChevronUp size={14} className="arrow-icon" /> : <ChevronDown size={14} className="arrow-icon" />}
             </button>
             {activeDropdown === 'about' && (
               <div className="nav-dropdown-menu">
-                <button onClick={() => handlePageSelect('about', 'who-we-are')}>Who We Are</button>
-                <button onClick={() => handlePageSelect('about', 'how-we-do-it')}>How We Do It</button>
-                <button onClick={() => handlePageSelect('about', 'why-us')}>Why Us</button>
-                <button onClick={() => handlePageSelect('about', 'industries-we-serve')}>Industries We Serve</button>
+                <button onClick={() => handlePageSelect('about', 'who-we-are')}>
+                  <Users size={14} /> Who We Are
+                </button>
+                <button onClick={() => handlePageSelect('about', 'how-we-do-it')}>
+                  <Activity size={14} /> How We Do It
+                </button>
+                <button onClick={() => handlePageSelect('about', 'why-us')}>
+                  <Target size={14} /> Why Us
+                </button>
+                <button onClick={() => handlePageSelect('about', 'industries-we-serve')}>
+                  <Layers size={14} /> Industries We Serve
+                </button>
               </div>
             )}
           </div>
@@ -99,15 +129,55 @@ export const Navbar: React.FC<NavbarProps> = ({
               className={`nav-link ${activePage === 'services' ? 'active' : ''}`}
               onClick={(e) => handleDropdownToggle(e, 'services')}
             >
+              <Briefcase size={16} className="nav-icon" />
               What We Do
-              <span className="dropdown-arrow">▼</span>
+              {activeDropdown === 'services' ? <ChevronUp size={14} className="arrow-icon" /> : <ChevronDown size={14} className="arrow-icon" />}
             </button>
             {activeDropdown === 'services' && (
               <div className="nav-dropdown-menu">
-                <button onClick={() => handlePageSelect('services', 'outdoor-marketing')}>Outdoor Marketing</button>
-                <button onClick={() => handlePageSelect('services', 'design-consulting')}>Design & Consulting</button>
-                <button onClick={() => handlePageSelect('services', 'digital-marketing')}>Digital Marketing</button>
-                <button onClick={() => handlePageSelect('services', 'other-services')}>Other Services</button>
+                <button onClick={() => handlePageSelect('services', 'outdoor-marketing')}>
+                  <Map size={14} /> Outdoor Marketing
+                </button>
+                <button onClick={() => handlePageSelect('services', 'design-consulting')}>
+                  <Palette size={14} /> Design & Consulting
+                </button>
+                <button onClick={() => handlePageSelect('services', 'digital-marketing')}>
+                  <Globe size={14} /> Digital Marketing
+                </button>
+                <button onClick={() => handlePageSelect('services', 'other-services')}>
+                  <HelpCircle size={14} /> Other Services
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Company Dropdown */}
+          <div className="nav-dropdown-wrapper">
+            <button
+              className={`nav-link ${activePage === 'company' ? 'active' : ''}`}
+              onClick={(e) => handleDropdownToggle(e, 'company')}
+            >
+              <Building2 size={16} className="nav-icon" />
+              Company
+              {activeDropdown === 'company' ? <ChevronUp size={14} className="arrow-icon" /> : <ChevronDown size={14} className="arrow-icon" />}
+            </button>
+            {activeDropdown === 'company' && (
+              <div className="nav-dropdown-menu">
+                <button onClick={() => handlePageSelect('company', 'about')}>
+                  <Info size={14} /> About
+                </button>
+                <button onClick={() => handlePageSelect('company', 'careers')}>
+                  <Users size={14} /> Careers
+                </button>
+                <button onClick={() => handlePageSelect('company', 'terms')}>
+                  <FileText size={14} /> Terms
+                </button>
+                <button onClick={() => handlePageSelect('company', 'privacy-policy')}>
+                  <ShieldCheck size={14} /> Privacy Policy
+                </button>
+                <button onClick={() => handlePageSelect('company', 'contact-us')}>
+                  <Mail size={14} /> Contact Us
+                </button>
               </div>
             )}
           </div>
@@ -117,6 +187,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => handlePageSelect('contact')}
           >
             Get Started
+            <ArrowRight size={16} className="cta-icon" />
           </button>
         </div>
 
@@ -138,26 +209,70 @@ export const Navbar: React.FC<NavbarProps> = ({
           className={`mobile-nav-link ${activePage === 'home' ? 'active' : ''}`}
           onClick={() => handlePageSelect('home')}
         >
+          <Home size={18} />
           Home
         </button>
 
         <div className="mobile-dropdown-section">
-          <span className="mobile-section-title">About</span>
+          <span className="mobile-section-title">
+            <Info size={16} /> About
+          </span>
           <div className="mobile-sub-menu">
-            <button onClick={() => handlePageSelect('about', 'who-we-are')}>Who We Are</button>
-            <button onClick={() => handlePageSelect('about', 'how-we-do-it')}>How We Do It</button>
-            <button onClick={() => handlePageSelect('about', 'why-us')}>Why Us</button>
-            <button onClick={() => handlePageSelect('about', 'industries-we-serve')}>Industries We Serve</button>
+            <button onClick={() => handlePageSelect('about', 'who-we-are')}>
+              <Users size={14} /> Who We Are
+            </button>
+            <button onClick={() => handlePageSelect('about', 'how-we-do-it')}>
+              <Activity size={14} /> How We Do It
+            </button>
+            <button onClick={() => handlePageSelect('about', 'why-us')}>
+              <Target size={14} /> Why Us
+            </button>
+            <button onClick={() => handlePageSelect('about', 'industries-we-serve')}>
+              <Layers size={14} /> Industries We Serve
+            </button>
           </div>
         </div>
 
         <div className="mobile-dropdown-section">
-          <span className="mobile-section-title">What We Do</span>
+          <span className="mobile-section-title">
+            <Briefcase size={16} /> What We Do
+          </span>
           <div className="mobile-sub-menu">
-            <button onClick={() => handlePageSelect('services', 'outdoor-marketing')}>Outdoor Marketing</button>
-            <button onClick={() => handlePageSelect('services', 'design-consulting')}>Design & Consulting</button>
-            <button onClick={() => handlePageSelect('services', 'digital-marketing')}>Digital Marketing</button>
-            <button onClick={() => handlePageSelect('services', 'other-services')}>Other Services</button>
+            <button onClick={() => handlePageSelect('services', 'outdoor-marketing')}>
+              <Map size={14} /> Outdoor Marketing
+            </button>
+            <button onClick={() => handlePageSelect('services', 'design-consulting')}>
+              <Palette size={14} /> Design & Consulting
+            </button>
+            <button onClick={() => handlePageSelect('services', 'digital-marketing')}>
+              <Globe size={14} /> Digital Marketing
+            </button>
+            <button onClick={() => handlePageSelect('services', 'other-services')}>
+              <HelpCircle size={14} /> Other Services
+            </button>
+          </div>
+        </div>
+
+        <div className="mobile-dropdown-section">
+          <span className="mobile-section-title">
+            <Building2 size={16} /> Company
+          </span>
+          <div className="mobile-sub-menu">
+            <button onClick={() => handlePageSelect('company', 'about')}>
+              <Info size={14} /> About
+            </button>
+            <button onClick={() => handlePageSelect('company', 'careers')}>
+              <Users size={14} /> Careers
+            </button>
+            <button onClick={() => handlePageSelect('company', 'terms')}>
+              <FileText size={14} /> Terms
+            </button>
+            <button onClick={() => handlePageSelect('company', 'privacy-policy')}>
+              <ShieldCheck size={14} /> Privacy Policy
+            </button>
+            <button onClick={() => handlePageSelect('company', 'contact-us')}>
+              <Mail size={14} /> Contact Us
+            </button>
           </div>
         </div>
 
@@ -166,6 +281,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           onClick={() => handlePageSelect('contact')}
         >
           Get Started
+          <ArrowRight size={16} />
         </button>
       </div>
     </nav>
