@@ -14,7 +14,7 @@ import React, { useEffect, useRef, useState } from "react";
  * - World map dots draw in with a subtle staggered fade/scale.
  */
 
-function useInView<T extends HTMLElement>(threshold = 0.25) {
+function useInView<T extends Element>(threshold = 0.25) {
   const ref = useRef<T | null>(null);
   const [inView, setInView] = useState(false);
   useEffect(() => {
