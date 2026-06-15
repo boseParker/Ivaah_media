@@ -34,13 +34,31 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [navVisible, setNavVisible] = useState(true);
+  const lastScrollY = React.useRef(0);
 
-  // Track window scroll
+  // Track scroll — hide on down, show on up
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentY = window.scrollY;
+
+      setIsScrolled(currentY > 50);
+
+      if (currentY < 10) {
+        setNavVisible(true);
+      } else if (currentY > lastScrollY.current) {
+        // Scrolling down → hide
+        setNavVisible(false);
+        setActiveDropdown(null);
+      } else {
+        // Scrolling up → show
+        setNavVisible(true);
+      }
+
+      lastScrollY.current = currentY;
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -78,7 +96,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   const isNavbarTransparent = activePage === 'home' && !isScrolled;
 
   return (
-    <nav className={`ivah-navbar ${isNavbarTransparent ? 'transparent-nav' : 'scrolled'}`}>
+    <nav
+      className={`ivah-navbar ${isNavbarTransparent ? 'transparent-nav' : 'scrolled'} ${navVisible ? 'nav-show' : 'nav-hide'}`}
+    >
       <div className="nav-container">
         {/* Brand Logo */}
         <div className="nav-logo" onClick={() => handlePageSelect('home')}>
@@ -163,7 +183,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
             {activeDropdown === 'company' && (
               <div className="nav-dropdown-menu">
-                
                 <button onClick={() => handlePageSelect('company', 'careers')}>
                   <Users size={14} /> Careers
                 </button>

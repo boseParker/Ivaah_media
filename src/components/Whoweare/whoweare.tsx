@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Compass, 
@@ -43,12 +43,30 @@ const highlights = [
   { label: 'Strategy Framework', value: '10-Step Omni-Channel' },
 ];
 
+// ─── UPDATE THIS PATH ───────────────────────────────────────────────────────
+const VIDEO_SRC = '/assets/videos/15164860_1920_1080_30fps.mp4';
+// ────────────────────────────────────────────────────────────────────────────
+
 export const WhoWeAreSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState('story');
+  const [videoReady, setVideoReady] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  // Safely trigger video playback on user click
+  const handlePlayVideo = () => {
+    if (videoRef.current) {
+      videoRef.current.play()
+        .then(() => {
+          setVideoReady(true);
+        })
+        .catch((error) => {
+          console.error("Video play failed or was interrupted:", error);
+        });
+    }
+  };
 
   return (
     <section className="ivah-container">
-      {/* INTERNAL CSS BLOCK - MERGES VIDEO PORT AND GLASS CARD DESIGNS */}
       <style dangerouslySetInnerHTML={{__html: `
         .ivah-container {
           position: relative;
@@ -68,7 +86,6 @@ export const WhoWeAreSection: React.FC = () => {
           z-index: 10;
         }
 
-        /* Header Styling */
         .ivah-header {
           display: flex;
           flex-direction: column;
@@ -99,7 +116,6 @@ export const WhoWeAreSection: React.FC = () => {
           margin: 0;
         }
 
-        /* Core Three Column Main Layout Grid */
         .ivah-three-col-grid {
           display: grid;
           grid-template-columns: 1fr;
@@ -110,7 +126,6 @@ export const WhoWeAreSection: React.FC = () => {
           .ivah-three-col-grid { grid-template-columns: 3.5fr 4.5fr 4fr; gap: 2rem; }
         }
 
-        /* Left Column Stack - Tabs Navigation */
         .ivah-tabs-stack {
           display: flex;
           flex-direction: column;
@@ -153,7 +168,6 @@ export const WhoWeAreSection: React.FC = () => {
         .ivah-tab-item.inactive .ivah-tab-text h3 { color: #e5e7eb; }
         .ivah-tab-text p { margin: 0.25rem 0 0 0; font-size: 0.75rem; color: #6b7280; }
 
-        /* Middle Column - Creative Video Port Card */
         .ivah-video-viewport {
           position: relative;
           background: radial-gradient(circle at 80% 20%, #1e3a8a 0%, #020617 100%);
@@ -168,30 +182,62 @@ export const WhoWeAreSection: React.FC = () => {
           box-sizing: border-box;
         }
 
-        .ivah-video-marquee-box {
+        /* ── Video placeholder shown until video loads ── */
+        .ivah-video-placeholder {
+          position: absolute;
+          inset: 0;
           display: flex;
           flex-direction: column;
-          justify-content: center;
           align-items: center;
-          flex-1: 1;
-          height: 100%;
-          gap: 0.5rem;
-          margin: auto 0;
+          justify-content: center;
+          gap: 0.75rem;
+          background: radial-gradient(circle at 60% 40%, #0f1f3d 0%, #020617 100%);
+          transition: opacity 0.4s ease;
+          z-index: 3;
+          cursor: pointer;
+        }
+        .ivah-video-placeholder.hidden {
+          opacity: 0;
+          pointer-events: none;
+        }
+        .ivah-play-ring {
+          width: 56px;
+          height: 56px;
+          border-radius: 50%;
+          border: 1.5px solid rgba(249,115,22,0.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #f97316;
+        }
+        .ivah-placeholder-label {
+          font-size: 0.7rem;
+          color: rgba(255,255,255,0.3);
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          font-weight: 600;
         }
 
-        .ivah-marquee-text {
-          font-size: 2.25rem;
-          font-weight: 900;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
-          line-height: 1.1;
+        .ivah-video-wrap {
+          position: absolute;
+          inset: 0;
+          z-index: 2;
         }
-        .ivah-marquee-text.outline {
-          color: transparent;
-          -webkit-text-stroke: 1px rgba(255, 255, 255, 0.25);
+        .ivah-video-wrap video {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
         }
-        .ivah-marquee-text.solid {
-          color: #ffffff;
+
+        .ivah-video-hud {
+          position: relative;
+          z-index: 10;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 100%;
+          pointer-events: none;
         }
 
         .ivah-video-controls {
@@ -201,10 +247,8 @@ export const WhoWeAreSection: React.FC = () => {
           color: rgba(255, 255, 255, 0.4);
           font-size: 0.75rem;
           font-variant-numeric: tabular-nums;
-          z-index: 5;
         }
 
-        /* Right Column - Premium Content Display Box */
         .ivah-display-canvas {
           background-color: #121212;
           border: 1px solid #1f2937;
@@ -248,7 +292,6 @@ export const WhoWeAreSection: React.FC = () => {
           font-weight: 300;
         }
 
-        /* What We Do / Non-Negotiables Section Injection */
         .ivah-non-negotiables-box {
           border-top: 1px solid rgba(255, 255, 255, 0.05);
           padding-top: 1.25rem;
@@ -283,7 +326,6 @@ export const WhoWeAreSection: React.FC = () => {
           flex-shrink: 0;
         }
 
-        /* Fixed Metrics Bar Layout */
         .ivah-metrics-bar {
           display: grid;
           grid-template-columns: 1fr;
@@ -341,37 +383,35 @@ export const WhoWeAreSection: React.FC = () => {
         }
       `}} />
       
-      {/* Background Glow Overlay */}
       <div className="ivah-ambient-glow" />
 
       <div className="ivah-wrapper">
         
-        {/* Section Header Area */}
+        {/* Section Header */}
         <div className="ivah-header">
           <div className="ivah-title-area">
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#f97316', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
               <span style={{ width: '6px', height: '6px', backgroundColor: '#f97316', borderRadius: '50%' }} />
-              Corporate Identity 
+              Corporate Identity
             </div>
             <h2>WHO WE ARE</h2>
           </div>
           <p className="ivah-subtitle">
-            Ivah Media is an elite multidisciplinary marketing, branding, and design management collective built to transform business objectives into unforgettable consumer connections[cite: 7, 14].
+            Ivah Media is an elite multidisciplinary marketing, branding, and design management collective built to transform business objectives into unforgettable consumer connections.
           </p>
         </div>
 
-        {/* Core 3-Column Interactive Content Block */}
+        {/* 3-Column Grid */}
         <div className="ivah-three-col-grid">
-          
-          {/* Column 1: Tabs Navigation Stack */}
+
+          {/* Column 1: Tab Navigation */}
           <div className="ivah-tabs-stack">
             <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: '#4b5563', fontWeight: 600, letterSpacing: '0.05em', marginBottom: '0.5rem', display: 'block' }}>
-              Our Functional Core [cite: 15]
+              Our Functional Core
             </span>
             {pillars.map((pillar) => {
               const Icon = pillar.icon;
               const isSelected = activeTab === pillar.id;
-              
               return (
                 <motion.div
                   key={pillar.id}
@@ -387,61 +427,82 @@ export const WhoWeAreSection: React.FC = () => {
                     <h3>{pillar.title}</h3>
                     <p>{pillar.tagline}</p>
                   </div>
-                  <ArrowUpRight 
-                    size={14} 
-                    style={{ 
+                  <ArrowUpRight
+                    size={14}
+                    style={{
                       transition: 'transform 0.3s, color 0.3s',
                       transform: isSelected ? 'rotate(45deg)' : 'rotate(0deg)',
                       color: isSelected ? '#f97316' : '#4b5563'
-                    }} 
+                    }}
                   />
                 </motion.div>
               );
             })}
           </div>
 
-          {/* Column 2: Creative Video Port Component View */}
+          {/* Column 2: Video Viewport */}
           <div className="ivah-video-viewport">
-            {/* Ambient Video Interlayer Pattern */}
+            {/* Grid dot overlay */}
             <div style={{
               position: 'absolute',
               inset: 0,
               backgroundImage: 'radial-gradient(rgba(255,255,255,0.01) 1px, transparent 1px)',
               backgroundSize: '12px 12px',
-              pointerEvents: 'none'
+              pointerEvents: 'none',
+              zIndex: 1
             }} />
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 5 }}>
-              <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.6)', fontWeight: 700, letterSpacing: '0.05em' }}>
-                SHOW VIDEOS 
-              </span>
-              <Volume2 size={14} style={{ color: 'rgba(255,255,255,0.4)' }} />
-            </div>
-
-            {/* Typography Video Grid Overlay Block */}
-            <div className="ivah-video-marquee-box">
-              <span className="ivah-marquee-text outline">LAMPPOSTS</span>
-              <span className="ivah-marquee-text outline">LAMPPOSTS</span>
-              <span className="ivah-marquee-text solid">LAMPPOSTS</span>
-              <span className="ivah-marquee-text outline">LAMPPOSTS</span>
-              <span className="ivah-marquee-text outline">LAMPPOSTS</span>
-            </div>
-
-            {/* Video Controls Footer Line */}
-            <div className="ivah-video-controls">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Play size={10} fill="currentColor" />
-                <span>0:20 / 0:49</span>
+            {/* Placeholder — Fades out and is clickable if autoplay is blocked */}
+            <div 
+              className={`ivah-video-placeholder${videoReady ? ' hidden' : ''}`}
+              onClick={handlePlayVideo}
+            >
+              <div className="ivah-play-ring">
+                <Play size={18} fill="currentColor" />
               </div>
-              <div style={{ display: 'flex', gap: '4px' }}>
-                <span style={{ width: '3px', height: '3px', backgroundColor: 'currentColor', borderRadius: '50%' }} />
-                <span style={{ width: '3px', height: '3px', backgroundColor: 'currentColor', borderRadius: '50%' }} />
-                <span style={{ width: '3px', height: '3px', backgroundColor: 'currentColor', borderRadius: '50%' }} />
+              <span className="ivah-placeholder-label">Show Reel</span>
+            </div>
+
+            {/* Actual video */}
+            <div className="ivah-video-wrap">
+              <video
+                ref={videoRef}
+                src={VIDEO_SRC}
+                autoPlay
+                loop
+                muted
+                playsInline
+                onCanPlay={() => setVideoReady(true)}
+              />
+            </div>
+
+            {/* HUD overlay */}
+            <div className="ivah-video-hud">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.6)', fontWeight: 700, letterSpacing: '0.05em' }}>
+                  SHOW REEL
+                </span>
+                <Volume2 size={14} style={{ color: 'rgba(255,255,255,0.4)', cursor: 'pointer', pointerEvents: 'auto' }} />
+              </div>
+
+              <div className="ivah-video-controls">
+                <div 
+                  onClick={handlePlayVideo}
+                  style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', pointerEvents: 'auto' }}
+                >
+                  <Play size={10} fill="currentColor" />
+                  <span>0:20 / 0:49</span>
+                </div>
+                <div style={{ display: 'flex', gap: '4px' }}>
+                  <span style={{ width: '3px', height: '3px', backgroundColor: 'currentColor', borderRadius: '50%' }} />
+                  <span style={{ width: '3px', height: '3px', backgroundColor: 'currentColor', borderRadius: '50%' }} />
+                  <span style={{ width: '3px', height: '3px', backgroundColor: 'currentColor', borderRadius: '50%' }} />
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Column 3: Premium Dynamic Info & Business Core Values Card */}
+          {/* Column 3: Dynamic Info Card */}
           <div className="ivah-display-canvas">
             <div style={{
               position: 'absolute',
@@ -450,11 +511,10 @@ export const WhoWeAreSection: React.FC = () => {
               backgroundSize: '20px 20px',
               pointerEvents: 'none'
             }} />
-            
+
             <AnimatePresence mode="wait">
               {pillars.map((pillar) => {
                 if (pillar.id !== activeTab) return null;
-
                 return (
                   <motion.div
                     key={pillar.id}
@@ -476,7 +536,6 @@ export const WhoWeAreSection: React.FC = () => {
                       </p>
                     </div>
 
-                    {/* Business Non-Negotiables Injection Layer */}
                     <div className="ivah-non-negotiables-box">
                       <div className="ivah-nn-title">Our Business Non-Negotiables</div>
                       <div className="ivah-nn-list">
@@ -498,10 +557,10 @@ export const WhoWeAreSection: React.FC = () => {
 
         </div>
 
-        {/* Bottom Metrics Bar Component */}
+        {/* Bottom Metrics Bar */}
         <div className="ivah-metrics-bar">
           {highlights.map((item, index) => (
-            <motion.div 
+            <motion.div
               key={index}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}

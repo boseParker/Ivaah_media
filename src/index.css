@@ -1529,3 +1529,14 @@ html, body {
 .nav-cta-btn:hover .cta-icon {
   transform: translateX(3px);
 }
+.ivah-navbar {
+  transition: transform 0.35s ease, background 0.3s ease;
+}
+
+.nav-hide {
+  transform: translateY(-100%);
+}
+
+.nav-show {
+  transform: translateY(0);
+}
