@@ -14,7 +14,7 @@ export const Home: React.FC<HomeProps> = ({ setActivePage }) => {
       <section className="hero-section">
         <video 
           className="hero-video" 
-          src="/hero.mp4" 
+          src="/hero1.mp4" 
           autoPlay 
           loop 
           muted 
@@ -22,7 +22,6 @@ export const Home: React.FC<HomeProps> = ({ setActivePage }) => {
         />
         <div className="hero-overlay"></div>
         <div className="hero-content">
-          <span className="hero-badge animate-fade-up">OMNI-CHANNEL MARKETING AGENCY</span>
           <h1 className="hero-title animate-hero-title">All great marketing begins with a plan!</h1>
           <p className="hero-description animate-fade-up delay-1">
             Ivah Media delivers high-impact branding, digital marketing, events expertise, and outdoor advertising across the UAE and globally.
