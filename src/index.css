@@ -285,6 +285,16 @@ html, body {
   animation: fadeInMenu 0.2s ease-out;
 }
 
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  height: 12px;
+  background: transparent;
+}
+
 @keyframes fadeInMenu {
   from { opacity: 0; transform: translate(-50%, 10px); }
   to { opacity: 1; transform: translate(-50%, 0); }

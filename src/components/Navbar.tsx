@@ -116,7 +116,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           {/* About Dropdown */}
-          <div className="nav-dropdown-wrapper">
+          <div 
+            className="nav-dropdown-wrapper"
+            onMouseEnter={() => setActiveDropdown('about')}
+            onMouseLeave={() => setActiveDropdown(null)}
+          >
             <button
               className={`nav-link ${activePage === 'about' ? 'active' : ''}`}
               onClick={(e) => handleDropdownToggle(e, 'about')}
@@ -144,7 +148,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Services Dropdown */}
-          <div className="nav-dropdown-wrapper">
+          <div 
+            className="nav-dropdown-wrapper"
+            onMouseEnter={() => setActiveDropdown('services')}
+            onMouseLeave={() => setActiveDropdown(null)}
+          >
             <button
               className={`nav-link ${activePage === 'services' ? 'active' : ''}`}
               onClick={(e) => handleDropdownToggle(e, 'services')}
@@ -172,7 +180,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Company Dropdown */}
-          <div className="nav-dropdown-wrapper">
+          <div 
+            className="nav-dropdown-wrapper"
+            onMouseEnter={() => setActiveDropdown('company')}
+            onMouseLeave={() => setActiveDropdown(null)}
+          >
             <button
               className={`nav-link ${activePage === 'company' ? 'active' : ''}`}
               onClick={(e) => handleDropdownToggle(e, 'company')}
