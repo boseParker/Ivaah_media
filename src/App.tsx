@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { Home } from './pages/Home';
@@ -8,49 +9,48 @@ import { Contact } from './pages/Contact';
 import './index.css';
 
 function App() {
-  const [activePage, setActivePage] = useState<string>('home');
-  const [scrollTarget, setScrollTarget] = useState<string | null>(null);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  // Handle scroll trigger when navigating to section
+  // Scroll to hash when location/hash changes with retry mechanism
   useEffect(() => {
-    if (scrollTarget) {
-      const element = document.getElementById(scrollTarget);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        setScrollTarget(null);
-      }
+    const hash = location.hash;
+    if (hash) {
+      const targetId = hash.replace('#', '');
+      let retries = 0;
+      const tryScroll = () => {
+        const element = document.getElementById(targetId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else if (retries < 15) {
+          retries++;
+          setTimeout(tryScroll, 50);
+        }
+      };
+      tryScroll();
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }, [activePage, scrollTarget]);
+  }, [location.pathname, location.hash]);
 
-  const renderPage = () => {
-    switch (activePage) {
-      case 'home':
-        return <Home setActivePage={setActivePage} />;
-      case 'about':
-        return <About />;
-      case 'services':
-        return <Services />;
-      case 'contact':
-        return <Contact />;
-      default:
-        return <Home setActivePage={setActivePage} />;
-    }
-  };
+  const activePage = location.pathname === '/' ? 'home' : location.pathname.substring(1);
+
+
 
   return (
     <>
-      <Navbar 
-        activePage={activePage} 
-        setActivePage={setActivePage} 
-        setScrollTarget={setScrollTarget} 
-      />
+      <Navbar activePage={activePage} />
       <main style={{ flex: 1, paddingTop: activePage === 'home' ? '0px' : '100px' }}>
-        {renderPage()}
+        <Routes>
+          <Route path="/" element={<Home setActivePage={(page) => navigate(page === 'home' ? '/' : `/${page}`)} />} />
+          <Route path="/home" element={<Home setActivePage={(page) => navigate(page === 'home' ? '/' : `/${page}`)} />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<Home setActivePage={(page) => navigate(page === 'home' ? '/' : `/${page}`)} />} />
+        </Routes>
       </main>
-      <Footer 
-        setActivePage={setActivePage} 
-        setScrollTarget={setScrollTarget} 
-      />
+      <Footer />
     </>
   );
 }

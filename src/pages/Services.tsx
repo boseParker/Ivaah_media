@@ -143,9 +143,9 @@ export const Services: React.FC = () => {
             <div className="pillar-visual flex-center" style={{ flexDirection: 'column', gap: '20px' }}>
               <img src="/events_and_films.png" alt="Events & Film Productions" className="showcase-img" style={{ borderRadius: '12px', border: '1px solid var(--color-border)' }} />
               <div className="other-services-showcase" style={{ width: '100%' }}>
-                <div className="showcase-box">🎥 Film Productions</div>
-                <div className="showcase-box">🎪 Event activations</div>
-                <div className="showcase-box">📚 Corporate Training</div>
+                <div className="showcase-box">Film Productions</div>
+                <div className="showcase-box">Event activations</div>
+                <div className="showcase-box">Corporate Training</div>
               </div>
             </div>
           </div>

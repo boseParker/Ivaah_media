@@ -1,22 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-interface FooterProps {
-  setActivePage: (page: string) => void;
-  setScrollTarget: (target: string) => void;
-}
+export const Footer: React.FC = () => {
+  const navigate = useNavigate();
 
-export const Footer: React.FC<FooterProps> = ({ setActivePage, setScrollTarget }) => {
   const handlePageSelect = (page: string, target?: string) => {
-    setActivePage(page);
+    const path = page === 'home' ? '/' : `/${page}`;
     if (target) {
-      setTimeout(() => {
-        setScrollTarget(target);
-        const element = document.getElementById(target);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 100);
+      navigate(`${path}#${target}`);
     } else {
+      navigate(path);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -54,7 +47,7 @@ export const Footer: React.FC<FooterProps> = ({ setActivePage, setScrollTarget }
           </div>
         </div>
       </div>
-      
+
       <div className="footer-bottom">
         <p>&copy; {new Date().getFullYear()} Ivah Media. All rights reserved.</p>
       </div>

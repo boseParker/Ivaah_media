@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  ChevronDown, 
+import { useNavigate } from 'react-router-dom';
+import {
+  ChevronDown,
   ChevronUp,
-  Home, 
-  Info, 
-  Briefcase, 
-  Building2, 
-  Users, 
-  Activity, 
-  Target, 
+  Home,
+  Info,
+  Briefcase,
+  Building2,
+  Users,
+  Activity,
+  Target,
   Layers,
-  Map, 
-  Palette, 
-  Globe, 
+  Map,
+  Palette,
+  Globe,
   HelpCircle,
   FileText,
   ShieldCheck,
@@ -22,15 +23,12 @@ import {
 
 interface NavbarProps {
   activePage: string;
-  setActivePage: (page: string) => void;
-  setScrollTarget: (target: string) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   activePage,
-  setActivePage,
-  setScrollTarget,
 }) => {
+  const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -77,18 +75,13 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   const handlePageSelect = (page: string, target?: string) => {
-    setActivePage(page);
     setIsMobileMenuOpen(false);
     setActiveDropdown(null);
+    const path = page === 'home' ? '/' : `/${page}`;
     if (target) {
-      setTimeout(() => {
-        setScrollTarget(target);
-        const element = document.getElementById(target);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 100);
+      navigate(`${path}#${target}`);
     } else {
+      navigate(path);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -123,7 +116,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <button
               className={`nav-link ${activePage === 'about' ? 'active' : ''}`}
-              onClick={(e) => handleDropdownToggle(e, 'about')}
+              onClick={() => handlePageSelect('about')}
             >
               <Info size={16} className="nav-icon" />
               About
@@ -148,14 +141,14 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Services Dropdown */}
-          <div 
+          <div
             className="nav-dropdown-wrapper"
             onMouseEnter={() => setActiveDropdown('services')}
             onMouseLeave={() => setActiveDropdown(null)}
           >
             <button
               className={`nav-link ${activePage === 'services' ? 'active' : ''}`}
-              onClick={(e) => handleDropdownToggle(e, 'services')}
+              onClick={() => handlePageSelect('services')}
             >
               <Briefcase size={16} className="nav-icon" />
               What We Do
@@ -180,7 +173,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Company Dropdown */}
-          <div 
+          <div
             className="nav-dropdown-wrapper"
             onMouseEnter={() => setActiveDropdown('company')}
             onMouseLeave={() => setActiveDropdown(null)}
@@ -287,7 +280,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Building2 size={16} /> Company
           </span>
           <div className="mobile-sub-menu">
-            <button onClick={() => handlePageSelect('company', 'about')}>
+            <button onClick={() => handlePageSelect('about')}>
               <Info size={14} /> About
             </button>
             <button onClick={() => handlePageSelect('company', 'careers')}>

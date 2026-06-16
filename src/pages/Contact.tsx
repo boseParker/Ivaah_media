@@ -60,15 +60,15 @@ export const Contact: React.FC = () => {
 
               <div className="contact-details-list">
                 <div className="contact-detail-item">
-                  <strong>📍 Office Address</strong>
+                  <strong>Office Address</strong>
                   <p>Downtown Dubai, United Arab Emirates</p>
                 </div>
                 <div className="contact-detail-item">
-                  <strong>📞 Call Us</strong>
+                  <strong>Call Us</strong>
                   <p>+971 4 123 4567</p>
                 </div>
                 <div className="contact-detail-item">
-                  <strong>✉️ Email Us</strong>
+                  <strong>Email Us</strong>
                   <p>hello@ivahmedia.ae</p>
                 </div>
               </div>
