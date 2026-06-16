@@ -1,0 +1,154 @@
+{
+  "digitalServices": [
+    {
+      "title": "Digital Strategy",
+      "desc": "Crafting goal-oriented roadmaps to guide multi-channel online campaigns."
+    },
+    {
+      "title": "Digital Branding",
+      "desc": "Establishing visual tone, digital assets, and guidelines for screen delivery."
+    },
+    {
+      "title": "Digital Marketing",
+      "desc": "Executing targeted pay-per-click and inbound campaigns that drive leads."
+    },
+    {
+      "title": "SEO / Keyword Strategy",
+      "desc": "Optimizing web pages to earn top organic placements on search queries."
+    },
+    {
+      "title": "Web Design",
+      "desc": "Building responsive, fast, and modern web applications that engage visitors."
+    },
+    {
+      "title": "Shopify / Ecommerce",
+      "desc": "Configuring online storefronts, product catalogs, and transaction flows."
+    },
+    {
+      "title": "Social Media Management",
+      "desc": "Curation, writing, scheduling, and community management on social feeds."
+    },
+    {
+      "title": "Email Marketing",
+      "desc": "Designing drip sequences, newsletters, and promotional broadcasts."
+    },
+    {
+      "title": "Website Management",
+      "desc": "Regular maintenance, security updates, uptime checks, and content edits."
+    },
+    {
+      "title": "Digital Transformation",
+      "desc": "Re-engineering standard business operations with modern software solutions."
+    }
+  ],
+  "serviceDetailsList": [
+    {
+      "id": "outdoor-marketing",
+      "title": "Outdoor Marketing",
+      "subtitle": "We find your story and help you tell it.",
+      "description": "Our Outdoor Advertising (OOH) capabilities cover the UAE's premier high-traffic locations, delivering physical-to-digital touchpoints that capture massive consumer attention. We manage everything from structural selection to design and regulatory permits.",
+      "image": "/dubai_ooh_billboard.png",
+      "tag": "PILLAR 01",
+      "features": [
+        {
+          "title": "Billboards",
+          "desc": "Massive standalone highway advertising placements targeting maximum traffic arteries."
+        },
+        {
+          "title": "Bridge Banners",
+          "desc": "Multi-lane high-readability displays that capture commuter attention instantaneously."
+        },
+        {
+          "title": "DOOH & PDOOH",
+          "desc": "Programmatic digital out-of-home campaigns that dynamically adapt to real-time parameters."
+        },
+        {
+          "title": "Airport & Transit",
+          "desc": "High-dwell time locations and mobile branding via complete Dubai Metro wraps."
+        }
+      ],
+      "extraInfo": "We streamline the complex UAE OOH layout, negotiating directly with premium media owners and ensuring quick compliance with strict cultural and municipality regulatory guidelines."
+    },
+    {
+      "id": "design-consulting",
+      "title": "Design & Consulting",
+      "subtitle": "Premium Brand Alignment & Fractional Leadership",
+      "description": "We provide senior strategic guidance to align design, messaging, and product positioning with business growth. We bridge the gap between creative concepts and bottom-line commercial authority.",
+      "image": "/design_consulting_detail.png",
+      "tag": "PILLAR 02",
+      "features": [
+        {
+          "title": "Brand Strategy & Management",
+          "desc": "We define positioning, visual guidelines, tone of voice, brand architecture, and long-term market relevance."
+        },
+        {
+          "title": "Fractional CMO",
+          "desc": "Providing senior-level brand leadership (5 to 40 hours per week) specializing in B2B GTM strategy, product launches, and sales enablement."
+        },
+        {
+          "title": "Consultant Experience",
+          "desc": "Gain access to top industry minds with 8 to 15+ years of premium experience in technology and corporate growth."
+        },
+        {
+          "title": "Strategic Execution",
+          "desc": "Ensuring every single creative and design decision directly supports broader commercial business goals."
+        }
+      ],
+      "extraInfo": "Unlike traditional design agencies that only focus on project-based execution, we work seamlessly alongside your leadership team as a dedicated partner."
+    },
+    {
+      "id": "digital-marketing",
+      "title": "Digital Marketing",
+      "subtitle": "Omni-Channel Online Authority",
+      "description": "Deploying 10 specialized digital service lines to build, manage, and scale your brand footprint online, generating measurable leads and driving authentic ROI.",
+      "image": "/digital_marketing_detail.png",
+      "tag": "PILLAR 03",
+      "features": [
+        {
+          "title": "Digital Strategy",
+          "desc": "Data-driven digital roadmaps that align technology, marketing, and business objectives."
+        },
+        {
+          "title": "SEO & Content",
+          "desc": "Optimizing web pages to earn top organic rankings and attract high-intent traffic."
+        },
+        {
+          "title": "Conversion Web Design",
+          "desc": "Designing modern, user-centric websites optimized for performance and conversion."
+        },
+        {
+          "title": "E-commerce & Shopify",
+          "desc": "Seamless online shopping experiences, catalytic product catalogs, and transaction flows."
+        }
+      ],
+      "extraInfo": "Our digital solutions target full lifecycle engagement, combining automation, analytics, and compelling content to nurture leads and scale your operations."
+    },
+    {
+      "id": "other-services",
+      "title": "Other Premium Services",
+      "subtitle": "Events, Cinematic Storytelling & Workshops",
+      "description": "From VIP activations to high-fidelity ad films, we create immersive experiences and visual narratives that build memorable emotional connections with your audience.",
+      "image": "/events_film_production_detail.png",
+      "tag": "PILLAR 04",
+      "features": [
+        {
+          "title": "Event Management",
+          "desc": "Conceptualizing and producing corporate conferences, VIP launches, and brand activations."
+        },
+        {
+          "title": "Ad Film Productions",
+          "desc": "Full-cycle production from scripting to cinematography and post-production for premium commercials."
+        },
+        {
+          "title": "Sales & Marketing Training",
+          "desc": "Custom workshops to align sales and marketing workflows, improve team performance, and scale knowledge."
+        },
+        {
+          "title": "Knowledge Retention",
+          "desc": "Building structured training environments to retain core marketing and brand strategies in-house."
+        }
+      ],
+      "extraInfo": "We execute corporate training that ensures your teams understand how to apply positioning, messaging, and go-to-market strategies effectively in real-world scenarios."
+    }
+  ]
+}
