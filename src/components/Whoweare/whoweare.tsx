@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Compass, 
@@ -7,8 +7,14 @@ import {
   ArrowUpRight,
   CheckCircle2,
   Play,
-  Volume2
+  Pause,
+  Volume2,
+  VolumeX
 } from 'lucide-react';
+
+import videoStory from '../../assets/videos/15164860_1920_1080_30fps.mp4';
+import videoOmni from '../../assets/videos/18450247-uhd_3840_2160_30fps.mp4';
+import videoExecution from '../../assets/videos/3087312-uhd_3840_2160_30fps.mp4';
 
 const pillars = [
   {
@@ -17,7 +23,8 @@ const pillars = [
     icon: Eye,
     tagline: 'We find your story and help you tell it.',
     description: 'Every great marketing campaign begins with a structural narrative blueprint. Our vision centers around finding what makes a brand irreplaceable and engineering that into a massive omnichannel media presence.',
-    highlight: 'Narrative Discovery'
+    highlight: 'Narrative Discovery',
+    video: videoStory
   },
   {
     id: 'omni',
@@ -25,7 +32,8 @@ const pillars = [
     icon: Compass,
     tagline: 'Delivering strategic multi-touchpoint value.',
     description: 'We execute unified, highly targeted corporate blueprints natively across Outdoor Marketing, elite Brand Strategy, Event Management, and highly performance-driven Digital Marketing paths.',
-    highlight: 'Integrated Ecosystems'
+    highlight: 'Integrated Ecosystems',
+    video: videoOmni
   },
   {
     id: 'execution',
@@ -33,7 +41,8 @@ const pillars = [
     icon: Target,
     tagline: 'Eliminating the gap between strategy and growth.',
     description: 'Even the most beautiful brand strategy fails without premium execution. We anchor every creative, media, or consulting choice strictly in business metrics to drive authentic, scalable commercial ROI.',
-    highlight: 'Measurable Value'
+    highlight: 'Measurable Value',
+    video: videoExecution
   }
 ];
 
@@ -43,27 +52,94 @@ const highlights = [
   { label: 'Strategy Framework', value: '10-Step Omni-Channel' },
 ];
 
-// ─── UPDATE THIS PATH ───────────────────────────────────────────────────────
-const VIDEO_SRC = '/assets/videos/15164860_1920_1080_30fps.mp4';
-// ────────────────────────────────────────────────────────────────────────────
 
 export const WhoWeAreSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState('story');
   const [videoReady, setVideoReady] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  // Safely trigger video playback on user click
-  const handlePlayVideo = () => {
+  const activePillar = pillars.find((p) => p.id === activeTab) || pillars[0];
+
+  // Synchronize play state and load new video on tab switch
+  useEffect(() => {
+    setVideoReady(false);
     if (videoRef.current) {
+      videoRef.current.load();
+      videoRef.current.muted = isMuted;
       videoRef.current.play()
         .then(() => {
+          setIsPlaying(true);
           setVideoReady(true);
         })
         .catch((error) => {
-          console.error("Video play failed or was interrupted:", error);
+          console.log("Video auto-play failed or was interrupted:", error);
+          setIsPlaying(false);
         });
     }
+  }, [activeTab]);
+
+  // Synchronize mute state on the video element if isMuted changes
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = isMuted;
+    }
+  }, [isMuted]);
+
+  // Handle manual play/pause toggle
+  const handleTogglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        videoRef.current.play()
+          .then(() => {
+            setIsPlaying(true);
+            setVideoReady(true);
+          })
+          .catch((error) => {
+            console.error("Video play failed:", error);
+          });
+      }
+    }
   };
+
+  // Handle volume toggle
+  const handleToggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (videoRef.current) {
+      const nextMute = !isMuted;
+      videoRef.current.muted = nextMute;
+      setIsMuted(nextMute);
+    }
+  };
+
+  // Handle time update event from video element
+  const handleTimeUpdate = () => {
+    if (videoRef.current) {
+      setCurrentTime(videoRef.current.currentTime);
+    }
+  };
+
+  // Handle loaded metadata event to capture duration
+  const handleLoadedMetadata = () => {
+    if (videoRef.current) {
+      setDuration(videoRef.current.duration);
+    }
+  };
+
+  // Format time
+  const formatTime = (time: number) => {
+    if (isNaN(time)) return '0:00';
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  };
+
 
   return (
     <section className="ivah-container">
@@ -71,7 +147,7 @@ export const WhoWeAreSection: React.FC = () => {
         .ivah-container {
           position: relative;
           min-height: 100vh;
-          background-color: #0c0c0c;
+          background-color: #080808;
           color: #e5e7eb;
           padding: 5rem 2rem;
           font-family: system-ui, -apple-system, sans-serif;
@@ -91,7 +167,7 @@ export const WhoWeAreSection: React.FC = () => {
           flex-direction: column;
           justify-content: space-between;
           align-items: flex-start;
-          border-bottom: 1px solid #1f2937;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
           padding-bottom: 2rem;
           margin-bottom: 4rem;
           gap: 1.5rem;
@@ -101,7 +177,7 @@ export const WhoWeAreSection: React.FC = () => {
         }
 
         .ivah-title-area h2 {
-          font-size: 2.5rem;
+          font-size: 2.8rem;
           font-weight: 900;
           color: #ffffff;
           margin: 0.5rem 0 0 0;
@@ -110,8 +186,8 @@ export const WhoWeAreSection: React.FC = () => {
 
         .ivah-subtitle {
           color: #9ca3af;
-          max-width: 450px;
-          font-size: 0.95rem;
+          max-width: 500px;
+          font-size: 1rem;
           line-height: 1.6;
           margin: 0;
         }
@@ -136,20 +212,25 @@ export const WhoWeAreSection: React.FC = () => {
           display: flex;
           align-items: center;
           gap: 1.15rem;
-          padding: 1.15rem;
+          padding: 1.25rem;
           border-radius: 0.85rem;
           cursor: pointer;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          border: 1px solid #181818;
+          border: 1px solid rgba(255, 255, 255, 0.04);
+          background-color: rgba(255, 255, 255, 0.02);
+          backdrop-filter: blur(8px);
         }
 
         .ivah-tab-item.active {
-          background: linear-gradient(135deg, #161616 0%, #121212 100%);
-          border-color: rgba(249, 115, 22, 0.4);
-          box-shadow: 0 10px 30px -10px rgba(249, 115, 22, 0.1);
+          background: linear-gradient(135deg, rgba(249, 115, 22, 0.12) 0%, rgba(249, 115, 22, 0.02) 100%);
+          border-color: rgba(249, 115, 22, 0.5);
+          box-shadow: 0 10px 30px -10px rgba(249, 115, 22, 0.2), inset 0 1px 0 rgba(255,255,255,0.05);
         }
-        .ivah-tab-item.inactive { background-color: #111111; }
-        .ivah-tab-item.inactive:hover { border-color: #374151; }
+        .ivah-tab-item.inactive:hover { 
+          border-color: rgba(255, 255, 255, 0.15); 
+          background-color: rgba(255, 255, 255, 0.05);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
 
         .ivah-tab-icon {
           padding: 0.65rem;
@@ -160,18 +241,18 @@ export const WhoWeAreSection: React.FC = () => {
           transition: all 0.3s ease;
         }
         .ivah-tab-item.active .ivah-tab-icon { background-color: #f97316; color: #000000; }
-        .ivah-tab-item.inactive .ivah-tab-icon { background-color: #1a1a1a; color: #6b7280; }
+        .ivah-tab-item.inactive .ivah-tab-icon { background-color: rgba(255, 255, 255, 0.05); color: #9ca3af; }
 
         .ivah-tab-text { flex: 1; }
-        .ivah-tab-text h3 { margin: 0; font-size: 1.05rem; font-weight: 700; transition: color 0.3s; }
+        .ivah-tab-text h3 { margin: 0; font-size: 1.1rem; font-weight: 700; transition: color 0.3s; }
         .ivah-tab-item.active .ivah-tab-text h3 { color: #f97316; }
         .ivah-tab-item.inactive .ivah-tab-text h3 { color: #e5e7eb; }
-        .ivah-tab-text p { margin: 0.25rem 0 0 0; font-size: 0.75rem; color: #6b7280; }
+        .ivah-tab-text p { margin: 0.25rem 0 0 0; font-size: 0.8rem; color: #9ca3af; opacity: 0.7; }
 
         .ivah-video-viewport {
           position: relative;
-          background: radial-gradient(circle at 80% 20%, #1e3a8a 0%, #020617 100%);
-          border: 1px solid #1e2937;
+          background: #0d0d0d;
+          border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 1.25rem;
           min-height: 400px;
           overflow: hidden;
@@ -180,6 +261,7 @@ export const WhoWeAreSection: React.FC = () => {
           justify-content: space-between;
           padding: 1.5rem;
           box-sizing: border-box;
+          box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
         }
 
         /* ── Video placeholder shown until video loads ── */
@@ -191,7 +273,8 @@ export const WhoWeAreSection: React.FC = () => {
           align-items: center;
           justify-content: center;
           gap: 0.75rem;
-          background: radial-gradient(circle at 60% 40%, #0f1f3d 0%, #020617 100%);
+          background: radial-gradient(circle at 60% 40%, rgba(15, 31, 61, 0.8) 0%, #0c0d12 100%);
+          backdrop-filter: blur(10px);
           transition: opacity 0.4s ease;
           z-index: 3;
           cursor: pointer;
@@ -204,18 +287,27 @@ export const WhoWeAreSection: React.FC = () => {
           width: 56px;
           height: 56px;
           border-radius: 50%;
-          border: 1.5px solid rgba(249,115,22,0.5);
+          border: 1.5px solid rgba(249,115,22,0.6);
           display: flex;
           align-items: center;
           justify-content: center;
           color: #f97316;
+          background-color: rgba(249, 115, 22, 0.1);
+          box-shadow: 0 0 20px rgba(249, 115, 22, 0.2);
+          transition: all 0.3s ease;
+        }
+        .ivah-video-placeholder:hover .ivah-play-ring {
+          transform: scale(1.1);
+          background-color: #f97316;
+          color: #000000;
+          box-shadow: 0 0 30px rgba(249, 115, 22, 0.4);
         }
         .ivah-placeholder-label {
-          font-size: 0.7rem;
-          color: rgba(255,255,255,0.3);
-          letter-spacing: 0.12em;
+          font-size: 0.75rem;
+          color: rgba(255,255,255,0.5);
+          letter-spacing: 0.15em;
           text-transform: uppercase;
-          font-weight: 600;
+          font-weight: 700;
         }
 
         .ivah-video-wrap {
@@ -244,14 +336,17 @@ export const WhoWeAreSection: React.FC = () => {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          color: rgba(255, 255, 255, 0.4);
-          font-size: 0.75rem;
+          color: rgba(255, 255, 255, 0.6);
+          font-size: 0.8rem;
+          font-weight: 500;
           font-variant-numeric: tabular-nums;
         }
 
         .ivah-display-canvas {
-          background-color: #121212;
-          border: 1px solid #1f2937;
+          background: rgba(18, 18, 18, 0.45);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 1.25rem;
           padding: 2.5rem;
           min-height: 400px;
@@ -261,6 +356,7 @@ export const WhoWeAreSection: React.FC = () => {
           justify-content: space-between;
           overflow: hidden;
           box-sizing: border-box;
+          box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
         }
 
         .ivah-badge {
@@ -271,54 +367,58 @@ export const WhoWeAreSection: React.FC = () => {
           font-weight: 600;
           padding: 0.35rem 0.85rem;
           border-radius: 0.375rem;
-          border: 1px solid rgba(249, 115, 22, 0.2);
+          border: 1px solid rgba(249, 115, 22, 0.25);
           margin-bottom: 1.5rem;
           letter-spacing: 0.05em;
+          text-transform: uppercase;
         }
 
         .ivah-canvas-tagline {
-          font-size: 1.6rem;
+          font-size: 1.8rem;
           font-weight: 800;
           color: #ffffff;
-          line-height: 1.3;
-          margin: 0 0 1rem 0;
+          line-height: 1.35;
+          margin: 0 0 1.25rem 0;
+          background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
         .ivah-canvas-desc {
-          color: #9ca3af;
-          font-size: 0.925rem;
-          line-height: 1.6;
+          color: #a1a1aa;
+          font-size: 0.95rem;
+          line-height: 1.65;
           margin: 0 0 1.5rem 0;
           font-weight: 300;
         }
 
         .ivah-non-negotiables-box {
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
-          padding-top: 1.25rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.06);
+          padding-top: 1.5rem;
           margin-top: auto;
         }
         
         .ivah-nn-title {
           font-size: 0.75rem;
           text-transform: uppercase;
-          color: #6b7280;
+          color: #71717a;
           font-weight: 700;
           letter-spacing: 0.05em;
-          margin-bottom: 0.75rem;
+          margin-bottom: 0.85rem;
         }
 
         .ivah-nn-list {
           display: flex;
           flex-direction: column;
-          gap: 0.65rem;
+          gap: 0.75rem;
         }
 
         .ivah-nn-item {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
-          font-size: 0.85rem;
-          color: #e5e7eb;
+          gap: 0.65rem;
+          font-size: 0.9rem;
+          color: #e4e4e7;
           font-weight: 500;
         }
         .ivah-nn-item svg {
@@ -330,8 +430,9 @@ export const WhoWeAreSection: React.FC = () => {
           display: grid;
           grid-template-columns: 1fr;
           gap: 1.5rem;
-          background-color: #111111;
-          border: 1px solid #1f2937;
+          background-color: rgba(255, 255, 255, 0.01);
+          backdrop-filter: blur(8px);
+          border: 1px solid rgba(255, 255, 255, 0.06);
           border-radius: 1.25rem;
           padding: 2rem;
         }
@@ -347,7 +448,7 @@ export const WhoWeAreSection: React.FC = () => {
         }
         @media (min-width: 640px) {
           .ivah-metric-card {
-            border-right: 1px solid #1f2937;
+            border-right: 1px solid rgba(255, 255, 255, 0.06);
             padding-right: 1.5rem;
           }
           .ivah-metric-card:last-child { border-right: none; padding-right: 0; }
@@ -356,17 +457,17 @@ export const WhoWeAreSection: React.FC = () => {
         .ivah-metric-label {
           font-size: 0.75rem;
           text-transform: uppercase;
-          color: #6b7280;
+          color: #71717a;
           font-weight: 600;
           letter-spacing: 0.05em;
         }
 
         .ivah-metric-value {
-          font-size: 1.35rem;
-          font-weight: 700;
+          font-size: 1.45rem;
+          font-weight: 800;
           color: #ffffff;
           margin-top: 0.35rem;
-          transition: color 0.2s;
+          transition: color 0.3s;
         }
         .ivah-metric-card:hover .ivah-metric-value { color: #f97316; }
 
@@ -406,7 +507,7 @@ export const WhoWeAreSection: React.FC = () => {
 
           {/* Column 1: Tab Navigation */}
           <div className="ivah-tabs-stack">
-            <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: '#4b5563', fontWeight: 600, letterSpacing: '0.05em', marginBottom: '0.5rem', display: 'block' }}>
+            <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: '#71717a', fontWeight: 600, letterSpacing: '0.05em', marginBottom: '0.5rem', display: 'block' }}>
               Our Functional Core
             </span>
             {pillars.map((pillar) => {
@@ -432,7 +533,7 @@ export const WhoWeAreSection: React.FC = () => {
                     style={{
                       transition: 'transform 0.3s, color 0.3s',
                       transform: isSelected ? 'rotate(45deg)' : 'rotate(0deg)',
-                      color: isSelected ? '#f97316' : '#4b5563'
+                      color: isSelected ? '#f97316' : '#71717a'
                     }}
                   />
                 </motion.div>
@@ -441,7 +542,7 @@ export const WhoWeAreSection: React.FC = () => {
           </div>
 
           {/* Column 2: Video Viewport */}
-          <div className="ivah-video-viewport">
+          <div className="ivah-video-viewport" onClick={handleTogglePlay} style={{ cursor: 'pointer' }}>
             {/* Grid dot overlay */}
             <div style={{
               position: 'absolute',
@@ -452,10 +553,9 @@ export const WhoWeAreSection: React.FC = () => {
               zIndex: 1
             }} />
 
-            {/* Placeholder — Fades out and is clickable if autoplay is blocked */}
+            {/* Placeholder — Fades out when video is ready */}
             <div 
               className={`ivah-video-placeholder${videoReady ? ' hidden' : ''}`}
-              onClick={handlePlayVideo}
             >
               <div className="ivah-play-ring">
                 <Play size={18} fill="currentColor" />
@@ -465,33 +565,91 @@ export const WhoWeAreSection: React.FC = () => {
 
             {/* Actual video */}
             <div className="ivah-video-wrap">
-              <video
-                ref={videoRef}
-                src={VIDEO_SRC}
-                autoPlay
-                loop
-                muted
-                playsInline
-                onCanPlay={() => setVideoReady(true)}
-              />
+              <AnimatePresence mode="wait">
+                <motion.video
+                  key={activeTab}
+                  ref={videoRef}
+                  src={activePillar.video}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  autoPlay
+                  loop
+                  muted={isMuted}
+                  playsInline
+                  onCanPlay={() => setVideoReady(true)}
+                  onTimeUpdate={handleTimeUpdate}
+                  onLoadedMetadata={handleLoadedMetadata}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    display: 'block'
+                  }}
+                />
+              </AnimatePresence>
+            </div>
+
+            {/* Progress Bar */}
+            <div style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: '3px',
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              zIndex: 5,
+              overflow: 'hidden'
+            }}>
+              <div style={{
+                height: '100%',
+                width: `${(currentTime / (duration || 1)) * 100}%`,
+                backgroundColor: '#f97316',
+                transition: 'width 0.1s linear'
+              }} />
             </div>
 
             {/* HUD overlay */}
             <div className="ivah-video-hud">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.6)', fontWeight: 700, letterSpacing: '0.05em' }}>
-                  SHOW REEL
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pointerEvents: 'auto' }}>
+                <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.7)', fontWeight: 700, letterSpacing: '0.08em' }}>
+                  {activePillar.title.toUpperCase()} REEL
                 </span>
-                <Volume2 size={14} style={{ color: 'rgba(255,255,255,0.4)', cursor: 'pointer', pointerEvents: 'auto' }} />
+                <div 
+                  onClick={handleToggleMute}
+                  style={{ 
+                    color: 'rgba(255,255,255,0.6)', 
+                    cursor: 'pointer', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    padding: '6px',
+                    borderRadius: '50%',
+                    backgroundColor: 'rgba(0,0,0,0.3)',
+                    transition: 'all 0.2s'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = '#f97316'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.6)'}
+                >
+                  {isMuted ? <VolumeX size={14} /> : <Volume2 size={14} />}
+                </div>
               </div>
 
-              <div className="ivah-video-controls">
+              <div className="ivah-video-controls" style={{ pointerEvents: 'auto' }}>
                 <div 
-                  onClick={handlePlayVideo}
-                  style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', pointerEvents: 'auto' }}
+                  onClick={(e) => { e.stopPropagation(); handleTogglePlay(); }}
+                  style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: '0.5rem', 
+                    cursor: 'pointer',
+                    padding: '4px 8px',
+                    borderRadius: '4px',
+                    backgroundColor: 'rgba(0,0,0,0.3)'
+                  }}
                 >
-                  <Play size={10} fill="currentColor" />
-                  <span>0:20 / 0:49</span>
+                  {isPlaying ? <Pause size={10} fill="currentColor" /> : <Play size={10} fill="currentColor" />}
+                  <span>{formatTime(currentTime)} / {formatTime(duration || 20)}</span>
                 </div>
                 <div style={{ display: 'flex', gap: '4px' }}>
                   <span style={{ width: '3px', height: '3px', backgroundColor: 'currentColor', borderRadius: '50%' }} />
@@ -577,4 +735,4 @@ export const WhoWeAreSection: React.FC = () => {
       </div>
     </section>
   );
-};
+};
