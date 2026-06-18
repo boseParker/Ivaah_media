@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, CheckCircle2, ChevronRight, TrendingUp, Target, Database, Zap } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, ChevronRight, TrendingUp, Target, Database, Zap, Megaphone, Users, BarChart3, Share2 } from 'lucide-react';
 import servicesData from '../data/servicesData.json';
 
 interface DetailFeature {
@@ -21,24 +21,24 @@ interface ServiceDetail {
 
 const STRATEGIC_ADVANTAGES = [
   {
-    icon: <TrendingUp size={28} />,
-    title: 'ROI Focused',
-    desc: 'Every dollar spent is tracked against tangible business outcomes and growth metrics.',
+    icon: <Megaphone size={28} />,
+    title: 'Brand Growth',
+    desc: 'We help businesses expand their digital presence through strategic media promotions and impactful campaigns.',
   },
   {
-    icon: <Target size={28} />,
-    title: 'Targeted Audiences',
-    desc: 'Precision psychographic and behavioral targeting ensures your message reaches the elite few.',
+    icon: <Users size={28} />,
+    title: 'Audience Reach',
+    desc: 'Connect with the right audience across social media, digital platforms, and targeted advertising channels.',
   },
   {
-    icon: <Database size={28} />,
-    title: 'Data Precision',
-    desc: 'Leveraging first-party data and AI to predict trends before they hit the market.',
+    icon: <BarChart3 size={28} />,
+    title: 'Data-Driven Campaigns',
+    desc: 'Our marketing strategies are backed by analytics, audience insights, and performance tracking for maximum results.',
   },
   {
-    icon: <Zap size={28} />,
-    title: 'Scalable Growth',
-    desc: 'Infrastructures built to scale from local campaigns to global dominance instantly.',
+    icon: <Share2 size={28} />,
+    title: 'Viral Engagement',
+    desc: 'Creative content and promotional strategies designed to boost engagement, visibility, and brand recognition.',
   },
 ];
 
@@ -210,11 +210,12 @@ export const ServiceDetail: React.FC = () => {
           }
           .sd-section-full {
             padding: 80px 24px;
+             background: #ffffffff;
           }
 
           /* ─── SECTION LABELS ─── */
           .sd-label {
-            font-size: 0.72rem;
+            font-size: 1rem;
             font-weight: 700;
             letter-spacing: 0.2em;
             text-transform: uppercase;
@@ -225,8 +226,15 @@ export const ServiceDetail: React.FC = () => {
           .sd-section-heading {
             font-size: clamp(1.8rem, 4vw, 2.8rem);
             font-weight: 800;
+             color: #ffff;
             letter-spacing: -0.025em;
-            color: #000000ff;
+            margin: 0 0 14px;
+          }
+            .sd-section-heading1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 800;
+             color: #000000ff;
+            letter-spacing: -0.025em;
             margin: 0 0 14px;
           }
           .sd-section-lead {
@@ -263,7 +271,7 @@ export const ServiceDetail: React.FC = () => {
           }
           .sd-feature-card {
             background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
+           border: 1px solid #e63946;
             border-radius: 12px;
             padding: 22px 24px;
             display: flex;
@@ -393,8 +401,8 @@ export const ServiceDetail: React.FC = () => {
             }
           }
           .sd-adv-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.07);
+            background: rgba(255, 255, 255, 1);
+            border: 1px solid #e63946;
             border-radius: 14px;
             padding: 32px 24px;
             display: flex;
@@ -403,7 +411,7 @@ export const ServiceDetail: React.FC = () => {
             transition: border-color 0.25s, transform 0.25s;
           }
           .sd-adv-card:hover {
-            border-color: rgba(255,255,255,0.2);
+           border-color: var(--color-accent-red, #e63946);
             transform: translateY(-4px);
           }
           .sd-adv-icon {
@@ -419,12 +427,12 @@ export const ServiceDetail: React.FC = () => {
           .sd-adv-card h4 {
             font-size: 1rem;
             font-weight: 700;
-            color: #fff;
+          
             margin: 0;
           }
           .sd-adv-card p {
             font-size: 0.88rem;
-            color: rgba(255,255,255,0.48);
+            
             margin: 0;
             line-height: 1.5;
           }
@@ -445,7 +453,6 @@ export const ServiceDetail: React.FC = () => {
           .sd-method-intro p {
             font-size: 1rem;
             line-height: 1.7;
-            color: rgba(255,255,255,0.5);
             margin: 0;
           }
           .sd-method-steps {
@@ -460,7 +467,7 @@ export const ServiceDetail: React.FC = () => {
             border-bottom: 1px solid rgba(255,255,255,0.06);
             transition: background 0.2s;
           }
-          .sd-method-step:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+          .sd-method-step:first-child { border-top: 1px solid rgba(0, 0, 0, 0.94); }
           .sd-step-num {
             width: 36px;
             height: 36px;
@@ -471,8 +478,8 @@ export const ServiceDetail: React.FC = () => {
             font-size: 0.82rem;
             font-weight: 800;
             flex-shrink: 0;
-            border: 1.5px solid rgba(255,255,255,0.15);
-            color: rgba(255,255,255,0.4);
+            border: 1.5px solid rgba(0, 0, 0, 0.91);
+           
             transition: all 0.2s;
           }
           .sd-method-step.highlight .sd-step-num {
@@ -483,12 +490,11 @@ export const ServiceDetail: React.FC = () => {
           .sd-step-body h4 {
             font-size: 1rem;
             font-weight: 700;
-            color: #fff;
             margin: 0 0 6px;
           }
           .sd-step-body p {
             font-size: 0.88rem;
-            color: rgba(255,255,255,0.48);
+          
             margin: 0;
             line-height: 1.5;
           }
@@ -565,12 +571,12 @@ export const ServiceDetail: React.FC = () => {
             font-size: clamp(2rem, 5vw, 3.2rem);
             font-weight: 900;
             letter-spacing: -0.03em;
-            color: #fff;
+           
             margin: 0 0 16px;
           }
           .sd-cta-strip p {
             font-size: 1.05rem;
-            color: rgba(255,255,255,0.5);
+            
             margin: 0 0 40px;
             line-height: 1.6;
           }
@@ -610,14 +616,14 @@ export const ServiceDetail: React.FC = () => {
         </section>
 
         {/* ── THE SPECTRUM ── */}
-        <section className="sd-section-full" style={{ background: 'var(--color-bg, #0d0d0d)' }}>
+        <section className="sd-section-full" >
           <div style={{ maxWidth: 1300, margin: '0 auto', padding: '0 24px' }}>
             <span className="sd-label">The Spectrum</span>
             <div className="sd-spectrum-layout">
 
               {/* Left */}
               <div className="sd-spectrum-intro">
-                <h2 className="sd-section-heading">
+                <h2 className="sd-section-heading1">
                   Comprehensive digital<br />solutions designed for impact.
                 </h2>
                 <p>{service.description}</p>
@@ -656,10 +662,10 @@ export const ServiceDetail: React.FC = () => {
         <div className="sd-divider" />
 
         {/* ── STRATEGIC ADVANTAGES ── */}
-        <section className="sd-section-full" style={{ background: '#0d0d0d' }}>
+        <section className="sd-section-full" >
           <div style={{ maxWidth: 1300, margin: '0 auto', padding: '0 24px' }}>
             <span className="sd-label">Strategic Advantages</span>
-            <h2 className="sd-section-heading" style={{ marginBottom: 48 }}>
+            <h2 className="sd-section-heading1" style={{ marginBottom: 48 }}>
               Why it works.
             </h2>
             <div className="sd-advantages-grid">
@@ -677,14 +683,14 @@ export const ServiceDetail: React.FC = () => {
         <div className="sd-divider" />
 
         {/* ── METHODOLOGY ── */}
-        <section className="sd-section-full" style={{ background: '#0d0d0d' }}>
+        <section className="sd-section-full">
           <div style={{ maxWidth: 1300, margin: '0 auto', padding: '0 24px' }}>
             <span className="sd-label">Methodology</span>
             <div className="sd-method-layout">
 
               {/* Left */}
               <div>
-                <h2 className="sd-section-heading">
+                <h2 className="sd-section-heading1">
                   The Path to<br />Performance
                 </h2>
                 <div className="sd-method-intro" style={{ marginTop: 20 }}>
@@ -715,7 +721,7 @@ export const ServiceDetail: React.FC = () => {
         <div className="sd-divider" />
 
         {/* ── WHY TRUST ── */}
-        <section className="sd-section-full" style={{ background: '#0d0d0d' }}>
+        <section className="sd-section-full" >
           <div style={{ maxWidth: 1300, margin: '0 auto', padding: '0 24px' }}>
             <div className="sd-trust-wrap">
               <div className="sd-trust-inner">
@@ -750,7 +756,7 @@ export const ServiceDetail: React.FC = () => {
         </section>
 
         {/* ── CTA ── */}
-        <section style={{ background: '#0d0d0d' }}>
+        <section style={{ background: '#fefdfdff' }}>
           <div className="sd-cta-strip">
             <span className="sd-label" style={{ display: 'block', marginBottom: 16 }}>Ready to Scale?</span>
             <h2>Book a strategy session<br />with our media architects.</h2>
