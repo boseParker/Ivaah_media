@@ -329,7 +329,10 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage }) => {
               onMouseEnter={() => setActiveDropdown('about')}
               onMouseLeave={() => setActiveDropdown(null)}
             >
-              <button className={`nav-link ${activePage === 'about' ? 'active' : ''}`}>
+              <button 
+                className={`nav-link ${activePage === 'about' ? 'active' : ''}`}
+                onClick={() => handlePageSelect('about')}
+              >
                 <Info size={15} />
                 About
                 <ChevronDown size={13} style={{ marginLeft: 2 }} />
@@ -358,7 +361,10 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage }) => {
               onMouseEnter={() => setActiveDropdown('services')}
               onMouseLeave={() => setActiveDropdown(null)}
             >
-              <button className={`nav-link ${activePage === 'services' ? 'active' : ''}`}>
+              <button 
+                className={`nav-link ${activePage === 'services' ? 'active' : ''}`}
+                onClick={() => handlePageSelect('services')}
+              >
                 <Briefcase size={15} />
                 What We Do
                 <ChevronDown size={13} style={{ marginLeft: 2 }} />
@@ -387,7 +393,10 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage }) => {
               onMouseEnter={() => setActiveDropdown('company')}
               onMouseLeave={() => setActiveDropdown(null)}
             >
-              <button className={`nav-link ${activePage === 'company' ? 'active' : ''}`}>
+              <button 
+                className={`nav-link ${activePage === 'company' ? 'active' : ''}`}
+                onClick={() => handlePageSelect('company')}
+              >
                 <Building2 size={15} />
                 Company
                 <ChevronDown size={13} style={{ marginLeft: 2 }} />

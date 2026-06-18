@@ -7,6 +7,7 @@ import { About } from './pages/About';
 import { Services } from './pages/Services';
 import { ServiceDetail } from './pages/ServiceDetail';
 import { Contact } from './pages/Contact';
+import { Company } from './pages/Company';
 import './index.css';
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/services/:id" element={<ServiceDetail />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/company" element={<Company />} />
           <Route path="*" element={<Home setActivePage={(page) => navigate(page === 'home' ? '/' : `/${page}`)} />} />
         </Routes>
       </main>
