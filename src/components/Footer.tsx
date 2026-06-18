@@ -377,12 +377,13 @@ export const Footer: React.FC = () => {
           <div className="links-columns-group">
             
             <div className="links-column">
-              <h4 className="column-title">Products</h4>
+              <h4 className="column-title">Corporate</h4>
               <ul className="links-list">
-                <li><button onClick={() => handlePageSelect('home')}>Home</button></li>
-                <li><button onClick={() => handlePageSelect('about', 'who-we-are')}>About Us</button></li>
-                <li><button onClick={() => handlePageSelect('services')}>Services</button></li>
-                <li><button onClick={() => handlePageSelect('contact')}>Contact</button></li>
+                <li><button onClick={() => handlePageSelect('who-we-are')}>Who We Are</button></li>
+                <li><button onClick={() => handlePageSelect('how-we-do-it')}>How We Do It</button></li>
+                <li><button onClick={() => handlePageSelect('why-us')}>Why Us</button></li>
+                <li><button onClick={() => handlePageSelect('industry-services')}>Industry Services</button></li>
+                <li><button onClick={() => handlePageSelect('careers')}>Careers</button></li>
               </ul>
             </div>
 

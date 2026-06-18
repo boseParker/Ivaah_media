@@ -8,6 +8,13 @@ import { Services } from './pages/Services';
 import { ServiceDetail } from './pages/ServiceDetail';
 import { Contact } from './pages/Contact';
 import { Company } from './pages/Company';
+import { Careers } from './pages/Careers';
+import { Terms } from './pages/Terms';
+import { Privacy } from './pages/Privacy';
+import { WhoWeAre } from './pages/WhoWeAre';
+import { IndustryServices } from './pages/IndustryServices';
+import { WhyUs } from './pages/WhyUs';
+import { HowWeDoIt } from './pages/HowWeDoIt';
 import './index.css';
 
 function App() {
@@ -51,6 +58,13 @@ function App() {
           <Route path="/services/:id" element={<ServiceDetail />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/company" element={<Company />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/who-we-are" element={<WhoWeAre />} />
+          <Route path="/industry-services" element={<IndustryServices />} />
+          <Route path="/why-us" element={<WhyUs />} />
+          <Route path="/how-we-do-it" element={<HowWeDoIt />} />
           <Route path="*" element={<Home setActivePage={(page) => navigate(page === 'home' ? '/' : `/${page}`)} />} />
         </Routes>
       </main>

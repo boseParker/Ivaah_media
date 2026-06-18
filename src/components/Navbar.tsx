@@ -339,16 +339,16 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage }) => {
               </button>
               {activeDropdown === 'about' && (
                 <div className="nav-dropdown-menu">
-                  <button onClick={() => handlePageSelect('about', 'who-we-are')}>
+                  <button onClick={() => handlePageSelect('who-we-are')}>
                     <Users size={14} /> Who We Are
                   </button>
-                  <button onClick={() => handlePageSelect('about', 'how-we-do-it')}>
+                  <button onClick={() => handlePageSelect('how-we-do-it')}>
                     <Activity size={14} /> How We Do It
                   </button>
-                  <button onClick={() => handlePageSelect('about', 'why-us')}>
+                  <button onClick={() => handlePageSelect('why-us')}>
                     <Target size={14} /> Why Us
                   </button>
-                  <button onClick={() => handlePageSelect('about', 'industries-we-serve')}>
+                  <button onClick={() => handlePageSelect('industry-services')}>
                     <Layers size={14} /> Industries Served
                   </button>
                 </div>
@@ -403,16 +403,16 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage }) => {
               </button>
               {activeDropdown === 'company' && (
                 <div className="nav-dropdown-menu">
-                  <button onClick={() => handlePageSelect('company', 'careers')}>
+                  <button onClick={() => handlePageSelect('careers')}>
                     <Users size={14} /> Careers
                   </button>
-                  <button onClick={() => handlePageSelect('company', 'terms')}>
+                  <button onClick={() => handlePageSelect('terms')}>
                     <FileText size={14} /> Terms
                   </button>
-                  <button onClick={() => handlePageSelect('company', 'privacy-policy')}>
+                  <button onClick={() => handlePageSelect('privacy')}>
                     <ShieldCheck size={14} /> Privacy Policy
                   </button>
-                  <button onClick={() => handlePageSelect('company', 'contact-us')}>
+                  <button onClick={() => handlePageSelect('contact')}>
                     <Mail size={14} /> Contact Us
                   </button>
                 </div>
@@ -452,10 +452,10 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage }) => {
           <div className="mobile-dropdown-section">
             <span className="mobile-section-title"><Info size={14} /> About</span>
             <div className="mobile-sub-menu">
-              <button onClick={() => handlePageSelect('about', 'who-we-are')}>Who We Are</button>
-              <button onClick={() => handlePageSelect('about', 'how-we-do-it')}>How We Do It</button>
-              <button onClick={() => handlePageSelect('about', 'why-us')}>Why Us</button>
-              <button onClick={() => handlePageSelect('about', 'industries-we-serve')}>Industries Served</button>
+              <button onClick={() => handlePageSelect('who-we-are')}>Who We Are</button>
+              <button onClick={() => handlePageSelect('how-we-do-it')}>How We Do It</button>
+              <button onClick={() => handlePageSelect('why-us')}>Why Us</button>
+              <button onClick={() => handlePageSelect('industry-services')}>Industries Served</button>
             </div>
           </div>
 
@@ -472,10 +472,10 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage }) => {
           <div className="mobile-dropdown-section">
             <span className="mobile-section-title"><Building2 size={14} /> Company</span>
             <div className="mobile-sub-menu">
-              <button onClick={() => handlePageSelect('company', 'careers')}>Careers</button>
-              <button onClick={() => handlePageSelect('company', 'terms')}>Terms</button>
-              <button onClick={() => handlePageSelect('company', 'privacy-policy')}>Privacy Policy</button>
-              <button onClick={() => handlePageSelect('company', 'contact-us')}>Contact Us</button>
+              <button onClick={() => handlePageSelect('careers')}>Careers</button>
+              <button onClick={() => handlePageSelect('terms')}>Terms</button>
+              <button onClick={() => handlePageSelect('privacy')}>Privacy Policy</button>
+              <button onClick={() => handlePageSelect('contact')}>Contact Us</button>
             </div>
           </div>
 

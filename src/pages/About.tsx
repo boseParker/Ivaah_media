@@ -396,7 +396,7 @@ export const About: React.FC = () => {
       <style dangerouslySetInnerHTML={{ __html: `
         .page-about {
           background-color: #0b0d11;
-          color: #e2e8f0;
+          color: #cbd5e1;
           font-family: 'Montserrat', sans-serif;
           overflow-x: hidden;
           position: relative;
@@ -415,19 +415,19 @@ export const About: React.FC = () => {
           padding: 80px 24px;
         }
 
-        /* Insights Lab White Theme Section */
+        /* Insights Lab White Theme Section - Keeping it white for nice design hierarchy or changing to dark? We change to dark for unified dark theme */
         .page-about .insights-lab-section {
-          background-color: #ffffff;
-          color: #0b0d11;
-          border-top: 1px solid rgba(0, 0, 0, 0.05);
-          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+          background-color: #080a0d;
+          color: #cbd5e1;
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
           position: relative;
         }
         .page-about .insights-lab-section .section-header h2 {
-          color: #0b0d11 !important;
+          color: #ffffff !important;
         }
         .page-about .insights-lab-section .section-header p {
-          color: #475569 !important;
+          color: #94a3b8 !important;
         }
         .page-about .insights-grid {
           display: grid;
@@ -435,8 +435,8 @@ export const About: React.FC = () => {
           gap: 24px;
         }
         .page-about .insight-lab-card {
-          background-color: #f8fafc;
-          border: 1px solid #e2e8f0;
+          background-color: rgba(30, 41, 59, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.04);
           border-radius: 16px;
           padding: 32px 24px;
           display: flex;
@@ -445,21 +445,21 @@ export const About: React.FC = () => {
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .page-about .insight-lab-card:hover {
-          background-color: #ffffff;
+          background-color: rgba(30, 41, 59, 0.3);
           border-color: #f97316;
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
           transform: translateY(-4px);
         }
         .page-about .insight-lab-card h4 {
           font-size: 1.25rem;
           font-weight: 700;
-          color: #0b0d11 !important;
+          color: #ffffff !important;
           margin: 0;
         }
         .page-about .insight-lab-card p {
           font-size: 0.9rem;
           line-height: 1.5;
-          color: #475569 !important;
+          color: #94a3b8 !important;
           margin: 0;
         }
         .page-about .insight-icon-box {
@@ -478,7 +478,7 @@ export const About: React.FC = () => {
           min-height: 85vh;
           display: flex;
           align-items: center;
-          background-image: linear-gradient(to right, rgba(11, 13, 17, 0.97) 30%, rgba(11, 13, 17, 0.75) 100%), url('/dubai_ooh_billboard.png');
+          background-image: linear-gradient(to right, rgba(11, 13, 17, 0.75) 30%, rgba(11, 13, 17, 0.45) 100%), url('/dubai_ooh_billboard.png');
           background-size: cover;
           background-position: center;
           border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -644,6 +644,7 @@ export const About: React.FC = () => {
           font-family: 'Outfit', sans-serif;
           font-weight: 600;
           font-size: 0.95rem;
+          color: #cbd5e1;
         }
         .page-about .compass-tab.active span {
           color: #27ae60;
@@ -722,6 +723,7 @@ export const About: React.FC = () => {
           font-size: 3.5rem;
           font-weight: 800;
           line-height: 1;
+          color: #ffffff;
         }
         .page-about .stat-number-wrapper .unit {
           font-size: 1.8rem;
@@ -911,6 +913,7 @@ export const About: React.FC = () => {
         .page-about .blueprint-header h3 {
           font-size: 1.6rem;
           margin-top: 4px;
+          color: #ffffff;
         }
 
         .page-about .blueprint-list-title {
@@ -989,6 +992,7 @@ export const About: React.FC = () => {
           padding: 20px;
           text-align: left;
           border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+          color: #ffffff;
         }
         @media (max-width: 768px) {
           .page-about .comparison-header-row {
@@ -1028,6 +1032,7 @@ export const About: React.FC = () => {
           font-size: 0.95rem;
           line-height: 1.5;
           vertical-align: top;
+          color: #cbd5e1;
         }
         @media (max-width: 768px) {
           .page-about .comparison-cell {
@@ -1135,6 +1140,7 @@ export const About: React.FC = () => {
           font-size: 1.15rem;
           font-weight: 600;
           margin: 0;
+          color: #ffffff;
         }
 
         .page-about .industry-card-body {
@@ -1214,6 +1220,7 @@ export const About: React.FC = () => {
         .page-about .team-card h3 {
           font-size: 1.4rem;
           margin-bottom: 4px;
+          color: #ffffff;
         }
         .page-about .team-role {
           font-size: 0.85rem;
@@ -1273,6 +1280,7 @@ export const About: React.FC = () => {
         .page-about .cta-content h2 {
           font-size: clamp(2rem, 4vw, 3rem);
           margin-bottom: 16px;
+          color: #ffffff;
         }
         .page-about .cta-content p {
           font-size: 1.15rem;
@@ -1280,7 +1288,7 @@ export const About: React.FC = () => {
           margin-bottom: 32px;
           line-height: 1.6;
         }
-      ` }} />
+` }} />
 
       {/* 1. HERO SECTION */}
       <section className="about-hero">
@@ -1548,7 +1556,7 @@ export const About: React.FC = () => {
                   key={index} 
                   className="industry-card"
                   style={{
-                    backgroundImage: `linear-gradient(to bottom, rgba(11, 13, 17, 0.85) 0%, rgba(11, 13, 17, 0.95) 100%), url(${sector.image})`,
+                    backgroundImage: `linear-gradient(to bottom, rgba(11, 13, 17, 0.65) 0%, rgba(11, 13, 17, 0.85) 100%), url(${sector.image})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center'
                   }}

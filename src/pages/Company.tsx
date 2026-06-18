@@ -165,8 +165,51 @@ export const Company: React.FC = () => {
       image: '/events_film_production_detail.png',
       focus: 'Ad Film Production, Commercials & VIP Events',
       bio: 'Marcus oversees scriptwriting, production, and editing for premium commercials. He engineers visual storytelling formats that drive emotional recall and digital search spikes.'
+    },
+    {
+      name: 'Farah Al Hashimi',
+      role: 'Partner & Head of Performance Marketing',
+      exp: '11+ Years GCC Ad Spends',
+      image: '/digital_marketing.png',
+      focus: 'Paid Media Strategy, ROI Audits & Multi-Channel Attribution',
+      bio: 'Farah oversees high-volume programmatic ad spends and attribution modeling. She designs advanced retargeting frameworks matching physical DOOH billboard spikes with digital conversion cycles.'
+    },
+    {
+      name: 'David Vance',
+      role: 'Chief Creative Officer',
+      exp: '16+ Years Global Brand Design',
+      image: '/events_film_production_detail.png',
+      focus: 'Cinematic Layouts, Brand Architecture & Interactive DOOH',
+      bio: 'David guides the structural and visual aesthetics of all OOH and digital projects. He brings experience from top-tier London and Dubai agencies, designing visual campaigns that stand out on highways.'
+    },
+    {
+      name: 'Zayd Bin Sultan',
+      role: 'Head of Strategy & Growth',
+      exp: '13+ Years B2B Scaleups',
+      image: '/ind_real_estate.png',
+      focus: 'Fractional GTM Consultations, SaaS Audits & Partner Circles',
+      bio: 'Zayd facilitates corporate expansion strategies. He leads our Fractional CMO advisory team, conducting comprehensive business audits to discover immediate cost savings and media synergies.'
     }
   ];
+
+  const advisoryBoard = [
+    {
+      name: 'Dr. Amina Al-Sabah',
+      role: 'Media Policy & Regulatory Advisor',
+      bio: 'Former senior advisor to the UAE Ministry of Culture. Dr. Amina counsels our concessions desk on local compliance, bilingual decency guidelines, and municipal permitting updates.'
+    },
+    {
+      name: 'Robert Chen',
+      role: 'Programmatic AdTech Advisor',
+      bio: 'Ex-Google EMEA Strategy Director. Robert coordinates our programmatic DOOH triggers, advising on analytics systems that sync high-traffic billboard exposures with digital spoor.'
+    },
+    {
+      name: 'Yousef Al-Mansoori',
+      role: 'Municipal Logistics Advisor',
+      bio: 'Retired development planner with 20+ years of Dubai Municipality exposure. Yousef supports our structural permits for new bridge banner deployments and highway digital grids.'
+    }
+  ];
+
 
   const activeMilestone = historyMilestones.find(m => m.year === activeYear) || historyMilestones[0];
 
@@ -271,14 +314,14 @@ export const Company: React.FC = () => {
           height: 100%;
           object-fit: cover;
           z-index: 1;
-          opacity: 0.45;
+          opacity: 0.55;
           filter: grayscale(40%);
         }
 
         .page-company .hero-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to bottom, rgba(8, 8, 8, 0.8) 0%, #080808 100%);
+          background: linear-gradient(to bottom, rgba(8, 8, 8, 0.55) 0%, #080808 100%);
           z-index: 2;
         }
 
@@ -337,6 +380,7 @@ export const Company: React.FC = () => {
           line-height: 1.1;
           margin-bottom: 24px;
           font-weight: 800;
+          color: #ffffff;
         }
         .page-company .hero-title-main span {
           color: #f97316;
@@ -465,6 +509,7 @@ export const Company: React.FC = () => {
         .page-company .charter-display-box h2 {
           font-size: 2.2rem;
           margin-bottom: 20px;
+          color: #ffffff;
         }
         .page-company .charter-display-box p {
           color: #94a3b8;
@@ -540,6 +585,7 @@ export const Company: React.FC = () => {
           color: #f97316;
           box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
           transform: scale(1.1);
+          background-color: #080808;
         }
 
         .page-company .timeline-content-card {
@@ -562,6 +608,7 @@ export const Company: React.FC = () => {
         .page-company .timeline-text-side h3 {
           font-size: 2rem;
           margin-bottom: 8px;
+          color: #ffffff;
         }
         .page-company .timeline-text-side span {
           display: inline-block;
@@ -704,6 +751,7 @@ export const Company: React.FC = () => {
         .page-company .leader-info-content h3 {
           font-size: 1.5rem;
           margin-bottom: 4px;
+          color: #ffffff;
         }
         
         .page-company .leader-exp-label {
@@ -732,6 +780,55 @@ export const Company: React.FC = () => {
           font-size: 0.85rem;
           line-height: 1.6;
           color: #cbd5e1;
+          margin: 0;
+        }
+
+        /* ---------------------------------------------------- */
+        /* STRATEGIC ADVISORY BOARD                            */
+        /* ---------------------------------------------------- */
+        .page-company .advisory-section-title {
+          text-align: center;
+          margin: 80px 0 20px 0;
+        }
+        .page-company .advisory-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 24px;
+          margin-top: 40px;
+        }
+        .page-company .advisor-card {
+          background: rgba(15, 23, 42, 0.25);
+          border: 1px solid rgba(255, 255, 255, 0.04);
+          border-radius: 16px;
+          padding: 32px;
+          transition: all 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          text-align: left;
+        }
+        .page-company .advisor-card:hover {
+          border-color: rgba(249, 115, 22, 0.4);
+          background: rgba(15, 23, 42, 0.4);
+          transform: translateY(-4px);
+        }
+        .page-company .advisor-role {
+          font-size: 0.75rem;
+          font-weight: 700;
+          color: #f97316;
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+        }
+        .page-company .advisor-name {
+          font-size: 1.3rem;
+          font-weight: 700;
+          color: #ffffff;
+          margin: 0;
+        }
+        .page-company .advisor-bio {
+          font-size: 0.85rem;
+          color: #cbd5e1;
+          line-height: 1.6;
           margin: 0;
         }
 
@@ -892,6 +989,7 @@ export const Company: React.FC = () => {
           font-size: clamp(2.2rem, 5vw, 3.2rem);
           margin-bottom: 20px;
           font-weight: 800;
+          color: #ffffff;
         }
         .page-company .collab-wrap p {
           font-size: 1.15rem;
@@ -899,7 +997,7 @@ export const Company: React.FC = () => {
           line-height: 1.7;
           margin-bottom: 36px;
         }
-      ` }} />
+` }} />
 
       {/* 1. HERO SECTION */}
       <section className="company-hero">
@@ -1063,6 +1161,25 @@ export const Company: React.FC = () => {
                   <div className="leader-focus-tag">Focus: {leader.focus}</div>
                   <p className="leader-bio">{leader.bio}</p>
                 </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Strategic Advisory Board */}
+          <div className="advisory-section-title">
+            <span className="company-tag" style={{ background: 'rgba(249, 115, 22, 0.06)', color: '#f97316', marginTop: '80px', display: 'inline-block' }}>Strategic Advisory</span>
+            <h3 style={{ fontSize: '2.2rem', marginTop: '10px', color: '#ffffff' }}>Our Board of Advisors</h3>
+            <p style={{ color: '#94a3b8', maxWidth: '600px', margin: '12px auto 40px auto', lineHeight: 1.5, fontSize: '0.9rem' }}>
+              Guiding our regulatory positioning, programmatic AdTech solutions, and municipal alignment across the Middle East.
+            </p>
+          </div>
+
+          <div className="advisory-grid">
+            {advisoryBoard.map((advisor, index) => (
+              <div key={index} className="advisor-card">
+                <span className="advisor-role">{advisor.role}</span>
+                <h4 className="advisor-name">{advisor.name}</h4>
+                <p className="advisor-bio">{advisor.bio}</p>
               </div>
             ))}
           </div>
