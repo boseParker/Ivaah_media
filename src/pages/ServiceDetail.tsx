@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, CheckCircle2, ChevronRight, TrendingUp, Target, Database, Zap, Megaphone, Users, BarChart3, Share2 } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, ChevronRight, Megaphone, Users, BarChart3, Share2 } from 'lucide-react';
 import servicesData from '../data/servicesData.json';
 
 interface DetailFeature {
